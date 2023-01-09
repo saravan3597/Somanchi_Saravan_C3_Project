@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,6 +35,7 @@ class RestaurantTest {
     public void addItemsToMenu(){
         restaurant.addToMenu("Sweet corn soup",119);
         restaurant.addToMenu("Vegetable lasagne", 269);
+        restaurant.addToMenu("Milk shake", 459);
     }
 
     public int getMenuItemsNumber(){
@@ -61,6 +63,13 @@ class RestaurantTest {
         addItemsToMenu();
         assertThrows(itemNotFoundException.class,
                 ()->restaurant.removeFromMenu("French fries"));
+    }
+
+    @Test
+    public void order_total_must_be_greater_than_0_if_number_of_items_added_are_more_than_one() {
+        addItemsToMenu();
+        restaurant.addItemToOrderList("Sweet corn soup");
+        assertTrue(restaurant.getOrderValue() > 0);
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }

@@ -9,7 +9,7 @@ public class Restaurant {
     public LocalTime openingTime;
     public LocalTime closingTime;
     private List<Item> menu = new ArrayList<Item>();
-
+    private List<String> orderList = new ArrayList<String>();
     public Restaurant(String name, String location, LocalTime openingTime, LocalTime closingTime) {
         this.name = name;
         this.location = location;
@@ -18,8 +18,7 @@ public class Restaurant {
     }
 
     public boolean isRestaurantOpen() {
-        LocalTime presentTime = LocalTime.now();
-        return presentTime.isAfter(openingTime) && presentTime.isBefore(closingTime);
+        return this.getCurrentTime().isAfter(openingTime) && this.getCurrentTime().isBefore(closingTime);
     }
 
     public LocalTime getCurrentTime(){ return  LocalTime.now(); }
@@ -62,4 +61,11 @@ public class Restaurant {
         return name;
     }
 
+    public void addItemToOrderList(String name){
+        orderList.add(name);
+    }
+    
+    public int getOrderValue(){
+        return 0;
+    }
 }
