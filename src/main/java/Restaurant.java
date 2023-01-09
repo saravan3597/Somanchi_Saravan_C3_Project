@@ -1,6 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Restaurant {
@@ -64,8 +65,26 @@ public class Restaurant {
     public void addItemToOrderList(String name){
         orderList.add(name);
     }
+
+    public int getOrderItemPrice(String item){
+        int price = 0;
+        Iterator<Item> iterator = menu.iterator();
+        while (iterator.hasNext()){
+            Item menuItem = iterator.next();
+            if(menuItem.getName().equals(item)){
+                price += menuItem.getPrice();
+            }
+        }
+        return price;
+    }
     
     public int getOrderValue(){
-        return 0;
+        int orderTotal = 0;
+        Iterator<String> iterator = orderList.listIterator();
+        while (iterator.hasNext()){
+            String orderItem = iterator.next();
+            orderTotal += getOrderItemPrice(orderItem);
+        }
+        return orderTotal;
     }
 }

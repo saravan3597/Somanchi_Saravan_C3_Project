@@ -69,7 +69,26 @@ class RestaurantTest {
     public void order_total_must_be_greater_than_0_if_number_of_items_added_are_more_than_one() {
         addItemsToMenu();
         restaurant.addItemToOrderList("Sweet corn soup");
+        restaurant.addItemToOrderList("Milk shake");
         assertTrue(restaurant.getOrderValue() > 0);
+    }
+
+    @Test
+    public void order_total_must_be_0_if_number_of_items_added_are_0() {
+        addItemsToMenu();
+        assertEquals(0, restaurant.getOrderValue());
+    }
+
+    @Test
+    public void order_item_price_must_be_0_if_item_is_not_found() {
+        addItemsToMenu();
+        assertEquals(0, restaurant.getOrderItemPrice("Popcorn"));
+    }
+    
+    @Test
+    public void order_item_price_must_be_greater_than_0_if_item_found() {
+        addItemsToMenu();
+        assertTrue(restaurant.getOrderItemPrice("Milk shake") > 0);
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
